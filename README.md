@@ -10,6 +10,8 @@
 - PostgreSQL persistence
 - Dockerized deployment (coming next)
 
+## Learning Outcomes:
+
 - REST API design with FastAPI
 - Authentication with JWT
 - Database modeling with SQLAlchemy
