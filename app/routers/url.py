@@ -6,6 +6,8 @@ from app.schemas.url import URLCreate, URLResponse, AnalyticsResponse
 from app.models.url import URL
 from app.oauth2 import get_current_user
 from app.utils import generate_short_code
+from app.redis_client import redis_client
+from app.middleware.rate_limit import rate_limiter
 
 router = APIRouter(
     prefix="/urls",
@@ -42,7 +44,7 @@ def get_my_urls(
 def shorten_url(
     url: URLCreate,
     db: Session = Depends(get_db),
-    current_user = Depends(get_current_user)
+    current_user = Depends(get_current_user), _: None = Depends(rate_limiter)
 ):
 
     if url.custom_alias:
@@ -94,6 +96,12 @@ def shorten_url(
     db.add(new_url)
     db.commit()
     db.refresh(new_url)
+
+    redis_client.setex(
+    new_url.short_code,
+    3600,
+    new_url.original_url
+)
 
     return {
     "id": new_url.id,
