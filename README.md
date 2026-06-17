@@ -8,7 +8,7 @@
 - IP-based rate limiting
 - Background click processing
 - PostgreSQL persistence
-- Dockerized deployment (coming next)
+- Dockerized deployment using Docker Compose
 
 ## Learning Outcomes:
 
