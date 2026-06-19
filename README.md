@@ -20,3 +20,10 @@
 - Background task processing
 - Analytics event tracking
 - Containerized deployments
+
+## Quality Assurance
+
+- Automated testing with Pytest
+- 11+ endpoint tests
+- Continuous Integration with GitHub Actions
+- Automatic test execution on every push and pull request
